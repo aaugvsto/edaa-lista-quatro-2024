@@ -69,9 +69,71 @@ public class Atividades {
         }
     }
 
-    //TODO: Implementar buscador binário para encontrar número 99
-    public void Atividade9(){
+    public static void Atividade9Iterador(){
         int[] listaNumeros = { 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100 };
+
+        int numeroBusca = 99;
+        int indiceInicio = 0;
+        int indiceFinal = listaNumeros.length - 1;
+        boolean encontrou = false;
+
+        while(indiceInicio <= indiceFinal){
+            int indiceMeio = (indiceInicio + indiceFinal) / 2;
+
+            if(listaNumeros[indiceMeio] == numeroBusca){
+                encontrou = true;
+                System.out.println("Incide de numero é: " + indiceMeio);
+                break;
+            }
+
+            if(listaNumeros[indiceMeio] < numeroBusca)
+                indiceInicio = indiceMeio + 1;
+            else
+                indiceFinal = indiceMeio - 1;
+
+        }
+
+        if(!encontrou)
+            System.out.println("Incide do número " + numeroBusca + " não foi encontrado.");
+    }
+
+    public void Atividade9Recursivo(){
+        int[] listaNumeros = { 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100 };
+
+        int numeroBusca = 99;
+        int indiceInicio = 0;
+        int indiceFinal = listaNumeros.length - 1;
+        boolean encontrou = false;
+
+        long start = System.currentTimeMillis();
+        int indice = this.BuscaBinariaRecursiva(listaNumeros, numeroBusca, indiceInicio, indiceFinal);
+        long end = System.currentTimeMillis() - start;
+
+        if(indice >= 0){
+            System.out.println("Incide do número " + numeroBusca + " é: " + indice);
+            System.out.println("Executado em: " + end / 1000);
+            return;
+        }
+
+        System.out.println("Incide do número " + numeroBusca + " não foi encontrado.");
+        System.out.println("Executado em: " + end);
+    }
+
+    private int BuscaBinariaRecursiva(int[] array, int key, int left, int rigth){
+        if(left <= rigth){
+            int mid = left + (rigth - left) / 2;
+
+            if(array[mid] == key)
+                return mid;
+
+            if(array[mid] < key)
+                return BuscaBinariaRecursiva(array, key, mid + 1, rigth);
+
+
+            return BuscaBinariaRecursiva(array, key, mid + 1, rigth);
+        }
+
+        return  -1;
     }
 
 }
